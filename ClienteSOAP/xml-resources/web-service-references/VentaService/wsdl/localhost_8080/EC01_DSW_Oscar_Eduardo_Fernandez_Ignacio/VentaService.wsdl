@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.company.pe/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="VentaService" targetNamespace="http://services.company.pe/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.company.pe/" elementFormDefault="unqualified" targetNamespace="http://services.company.pe/" version="1.0">
+
+  <xs:element name="listarVentas" type="tns:listarVentas"/>
+
+  <xs:element name="listarVentasResponse" type="tns:listarVentasResponse"/>
+
+  <xs:complexType name="listarVentas">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="listarVentasResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ventaDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ventaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigoBicicleta" type="xs:string"/>
+      <xs:element minOccurs="0" name="dniAsesor" type="xs:string"/>
+      <xs:element name="idVenta" type="xs:int"/>
+      <xs:element minOccurs="0" name="nombreAsesor" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombreBicicleta" type="xs:string"/>
+      <xs:element name="stockBicicleta" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="listarVentasResponse">
+    <wsdl:part element="tns:listarVentasResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarVentas">
+    <wsdl:part element="tns:listarVentas" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ventaservice">
+    <wsdl:operation name="listarVentas">
+      <wsdl:input message="tns:listarVentas" name="listarVentas">
+    </wsdl:input>
+      <wsdl:output message="tns:listarVentasResponse" name="listarVentasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VentaServiceSoapBinding" type="tns:ventaservice">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listarVentas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarVentas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarVentasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VentaService">
+    <wsdl:port binding="tns:VentaServiceSoapBinding" name="ventaservicePort">
+      <soap:address location="http://localhost:8080/EC01_DSW_Oscar_Eduardo_Fernandez_Ignacio/VentaService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
